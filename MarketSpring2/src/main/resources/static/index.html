@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="app">
+<html ng-app="app" xmlns:th="http://www.w3.org/1999/xhtml">
 <html>
 
 <head>
@@ -38,8 +38,30 @@
             <button type="button" class="btn btn-danger" ng-click="deleteProductsById(p.id)">Info</button>
         </td>
     </tr>
-</tbody>
     </table>
+    </tbody>
+        <h1>Корзина товаров</h1>
+
+        <h3>Заказы</h3>
+    <body>
+    <form id="add-form" th:action="@{/}" th:object="${product}" th:method="post">
+        <div class="row">
+            <input type="text" th:field="*{name}"></input>
+        </div>
+        <div class="row">
+            <button id="add" type="submit">Добавить в корзину</button>
+        </div>
+    </form>
+    <table>
+        <tbody th:each="product, iStat : ${products}">
+        <tr th:style="${iStat.odd}? 'font-weight: bold;'">
+            <td th:text="${iStat.index}+1"></td>
+            <td th:text="${product.title}"></td>
+        </tr>
+        </tbody>
+        </table>
+
+    </body>
 </div>
 </body>
 </html>

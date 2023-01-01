@@ -18,10 +18,17 @@ CREATE TABLE users_roles (
     primary key (user_id, role_id),
 );
 CREATE TABLE products (
-    products-id         serial,
+    products-id         bigserial,
     products_title      int not null,
     products_price      int not null
 );
+CREATE TABLE orders (
+    user_id             bigserial,
+    products_id         bigserial,
+    products_title      int not null,
+    products_price      int not null,
+    orders_date         int not null
+)
 
 insert into roles (name)
 values
@@ -39,3 +46,4 @@ values
 insert into products (products_title, products_price)
 values
 ('title', 'price');
+
