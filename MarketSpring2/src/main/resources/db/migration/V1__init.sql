@@ -1,4 +1,12 @@
-CREATE TABLE products (id bigserial primary key, title varchar(255), price int);
+CREATE TABLE products
+(
+    id bigserial        primary key,
+    title               varchar(255),
+    price               int,
+    create_at           timestamp default current_timestamp,
+    update_at           timestamp default current_timestamp
+);
+
 INSERT into products (title, price) values
 ('Milk', 80), ('Bread', 25), ('Cheese', 300);
 
