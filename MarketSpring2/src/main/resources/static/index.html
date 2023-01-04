@@ -34,34 +34,43 @@
         <td>{{p.title}}</td>
         <td>{{p.price}}</td>
         <td>
-            <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">Info</button>
-            <button type="button" class="btn btn-danger" ng-click="deleteProductsById(p.id)">Info</button>
+            <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
+
         </td>
     </tr>
     </table>
     </tbody>
-        <h1>Корзина товаров</h1>
-
-        <h3>Заказы</h3>
-    <body>
-    <form id="add-form" th:action="@{/}" th:object="${product}" th:method="post">
-        <div class="row">
-            <input type="text" th:field="*{name}"></input>
-        </div>
-        <div class="row">
-            <button id="add" type="submit">Добавить в корзину</button>
-        </div>
-    </form>
-    <table>
-        <tbody th:each="product, iStat : ${products}">
-        <tr th:style="${iStat.odd}? 'font-weight: bold;'">
-            <td th:text="${iStat.index}+1"></td>
-            <td th:text="${product.title}"></td>
+    <h3>Корзина</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Id</td>
+            <td>Название</td>
+            <td>Количество</td>
+            <td>Цена</td>
         </tr>
-        </tbody>
-        </table>
+        <tbody>
 
-    </body>
+        <tr ng-repeat="item in cart.items">
+            <td>{{item.productId}}</td>
+            <td>{{item.productTitle}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.pricePerProduct + ' x ' + item.quantity ' = ' + item.price}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changeQuantityInCart(item.quantity, -1)">-</button>
+                {{item.quantity}}
+                <button class="btn btn-primary" ng-click="changeQuantityInCart(item.quantity, 1)">+</button>
+                <button type="button" class="btn btn-danger" ng-click="clear">Очистить</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteProductsById(item.productId)">Удалить</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Итого</td>
+            <td></td>
+            <td>{{cart.totalPrice}}</td>
+        </tr>
+    </table>
+    </tbody>
+
 </div>
 </body>
 </html>
