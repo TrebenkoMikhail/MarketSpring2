@@ -3,12 +3,15 @@ package ru.geekbrainsspring.MarketSpring2.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrainsspring.MarketSpring2.converters.ProductConverter;
 import ru.geekbrainsspring.MarketSpring2.dto.ProductDto;
+import ru.geekbrainsspring.MarketSpring2.entities.Category;
 import ru.geekbrainsspring.MarketSpring2.entities.Order;
 import ru.geekbrainsspring.MarketSpring2.entities.Product;
 import ru.geekbrainsspring.MarketSpring2.exceptions.ResourceNotFoundException;
 import ru.geekbrainsspring.MarketSpring2.repositories.CartRepository;
 import ru.geekbrainsspring.MarketSpring2.services.CartService;
+import ru.geekbrainsspring.MarketSpring2.services.CategoryService;
 import ru.geekbrainsspring.MarketSpring2.services.ProductService;
 
 import java.util.List;
@@ -19,28 +22,23 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
-    private final CartRepository cartRepository;
-    private final CartService cartService;
+    private  final ProductConverter productConverter;
 
     @GetMapping
     public List<ProductDto> findAllProducts() {
-        return productService.findAll().stream().map(p -> new ProductDto(p.getId(), p.getTitle(), p.getPrice())).collect(Collectors.toList());
+        return productService.findAll().stream().map(productConverter::entityToDto).collect(Collectors.toList());
     }
-
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> findAllProductsById(@PathVariable Long id){
-//        Optional<Product> product = productService.findById(id);
-//        if (!product.isPresent()) {
-//            ResponseEntity<AppError> err = new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), "продуктн не найден, id " + id), HttpStatus.NOT_FOUND);
-//        return err;
-//        }
-//        return new ResponseEntity<>(product.get(), HttpStatus.OK);
-//    }
 
     @GetMapping("/{id}")
     public ProductDto findAllProductsById(@PathVariable Long id) {
         Product p = productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("продуктн не найден, id " + id));
-        return new ProductDto(p.getId(), p.getTitle(), p.getPrice());
+        return productConverter.entityToDto(p);
+    }
+
+    @PostMapping
+    public ProductDto createNewProduct(@RequestBody ProductDto productDto) {
+       Product p = productService.createNewProduct(productDto);
+        return productConverter.entityToDto(p);
     }
 
     @DeleteMapping("/{id}")
