@@ -1,4 +1,4 @@
-package ru.geekbrains.spring.market.carts.integrations;
+package ru.geekbrains.spring.market.core.integrations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,6 +13,6 @@ public class ProductServiceIntegration {
     private final RestTemplate restTemplate;
 
     public Optional<ProductDto> getProductById(Long id) {
-        return Optional.ofNullable(restTemplate.getForObject("http://localhost:8189/spring/api/v1/cart/products/" + id, ProductDto.class));
+        return Optional.ofNullable(restTemplate.getForObject("http://localhost:8189/spring/api/v1/products/" + id, ProductDto.class));
     }
 }
