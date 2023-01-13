@@ -1,0 +1,26 @@
+server:
+  port: 8188
+  servlet:
+    context-path: /spring-market-auth
+    session:
+      spring:
+        datasource:
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:file:./users;MODE=PostgreSQL
+          username: sa
+          password:
+      jpa:
+        show-sql: true
+        properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+
+      h2:
+        console:
+          enable: true
+          setting:
+            web-allow-others: false
+
+  jwt:
+    secret: sr;l4ge559835t89gj2w094j0qfj9fj0q9j09
+    lifetime: 36000000
