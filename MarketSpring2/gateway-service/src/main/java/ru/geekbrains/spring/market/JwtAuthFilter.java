@@ -1,0 +1,49 @@
+
+
+
+@Component
+public class JwtAuthFilter extends AbstractGateWayFilterFactory<JwtAuthFilter.Config> {
+    @Autowired
+    private JwtUtil jwtUtil;
+    public JwtAuthFilter() { super(Config.class);}
+    @Override
+    public GatewayFilter apply(Config config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            if (!isAuthMissing(request)) {
+                final String token = getAuthHeader(request);
+                if (jwtUtil.isInvalid(token)) {
+                    return this.onError(exchange, "Authorization header is invalid", HttpStatus.UNAUTHORIZATED);
+                }
+                populateRequestWithHeaders(exchange, token);
+            }
+            return chain.filter(exchange);
+        };
+        }
+    public class Config {
+
+}
+    private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
+    ServerHttpResponse response = exchange.getResponse();
+    response.setStatusCode(httpStatus);
+    return response.setCompile();
+    }
+    private String getAuthHeader(ServerHttpRequest request) {
+        return request.getHeaders().getOrEmpty("Authorization").get(0).substring(7);
+    }
+    private boolean isAuthMissing(ServerHttpRequest request) {
+        if(!request.getHeaders().containsKey("Authorization")) {
+            return true;
+        }
+        if(!request.getHeaders().getOrEmpty("Authorization").get(0).starsWish("Bearer")) {
+            return true;
+        }
+            return false;
+    }
+    private void populateRequestWithHeaders (ServerWebExchange exchange, String token) {
+        Claims claims = jwtUtil.getAllClaimsFromToken(token);
+        exchange.getRequest().mutate()
+                .header("username", claims.getSubject())
+                .build();
+    }
+}
