@@ -10,7 +10,8 @@ CREATE TABLE products
     id                  bigserial primary key,
     title               varchar(255),
     category_id         bigint reference categories (id),
-    price               int,
+    price               BigDecimal,
+    category_id         bigint reference categories (id)
     create_at           timestamp default current_timestamp,
     update_at           timestamp default current_timestamp
 );
@@ -18,48 +19,28 @@ CREATE TABLE products
 INSERT into products (title, price, category_id) values
 ('Milk', 80, 1), ('Bread', 25, 1, ('Cheese', 300, 1);
 
-create table users (
-    id                  bigserial primary key,
-    username            varchar(30) not null unique,
-    password            varchar(80) not null,
-  );
 
-create table roles (
-    id                  bigserial primary key,
-    name                varchar(50) not null,
-   );
-CREATE TABLE users_roles (
-    user_id             bigint not null,
-    role_id             int not null,
-    primary key (user_id, role_id),
-);
-CREATE TABLE products (
-    products-id         bigserial,
-    products_title      int not null,
-    products_price      int not null
-);
 CREATE TABLE orders (
-    user_id             bigserial,
-    products_id         bigserial,
-    products_title      int not null,
-    products_price      int not null,
-    orders_date         int not null
-)
+    id                  bigserial primary key,
+    username            varchar (255) not null,
+    total_price         BigDecimal not null,
+    address             varchar (255),
+    phone               varchar (255),
+    create_at           timestamp default current_timestamp,
+    update_at           timestamp default current_timestamp
+);
 
-insert into roles (name)
-values
-('ROLE_USER'), ('ROLE_ADMIN');
+create table order_items (
+    id                  bigserial primary key,
+    product_id          bigint not null references products (id),
+    order_id            bigint not null references orders (id),
+    quantity            int not null,
+    price_per_product   BigDecimal not null,
+    price               BigDecimal not null,
+    create_at           timestamp default current_timestamp,
+    update_at           timestamp default current_timestamp
+);
 
-insert into users (username, password)
-values
-('bob', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i');
-('John', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i');
 
-insert into users_roles (user_id, role_id)
-values
-(1, 1);
 
-insert into products (products_title, products_price)
-values
-('title', 'price');
 

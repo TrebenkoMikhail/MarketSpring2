@@ -1,4 +1,4 @@
-package ru.geekbrains.spring.market.core.services;
+package ru.geekbrains.spring.market.services;
 
 
 import lombok.RequiredArgsConstructor;
@@ -9,13 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.spring.market.core.entities.Roles;
-import ru.geekbrains.spring.market.core.repositories.UserRepository;
-
+import ru.geekbrainsspring.MarketSpring2.entities.Roles;
+import ru.geekbrainsspring.MarketSpring2.repositories.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,8 +29,6 @@ public class UserService implements UserDetailsService {
         User user = findByUsername(username).get();
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities((Collection<Roles>) user.getRoles()));
     }
-
-
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Roles> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());

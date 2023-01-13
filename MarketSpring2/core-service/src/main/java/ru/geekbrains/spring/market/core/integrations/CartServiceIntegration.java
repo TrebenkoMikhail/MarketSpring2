@@ -2,17 +2,28 @@ package ru.geekbrains.spring.market.core.integrations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-import ru.geekbrains.spring.market.api.ProductDto;
+import org.springframework.web.reactive.function.client.WebClient;
+import ru.geekbrains.spring.market.api.CartDto;
 
-import java.util.Optional;
+
 
 @Component
 @RequiredArgsConstructor
 public class CartServiceIntegration {
-    private final Webclient cartserviceWebClient;
+    private final WebClient cartserviceWebClient;
 
-    public Optional<ProductDto> getProductById(Long id) {
-        return Optional.ofNullable(restTemplate.getForObject("http://localhost:8189/spring/api/v1/products/" + id, ProductDto.class));
+    public CartDto getCurrentCart() {
+        return cartserviceWebClient.get()
+                .uri("/api/v1/cart/")
+                .retrieve()
+                .bodyToMono(CartDto.class)
+                .block();
+    }
+    public void clear() {
+        cartserviceWebClient.get()
+                .uri("/api/v1/cart/clear")
+                .retrieve()
+                .toBodilessEntity()
+                .block();
     }
 }

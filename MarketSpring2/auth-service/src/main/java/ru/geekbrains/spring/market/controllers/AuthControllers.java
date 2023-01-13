@@ -1,4 +1,4 @@
-package ru.geekbrains.spring.market.core.controllers;
+package ru.geekbrains.spring.market.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ru.geekbrains.spring.market.api.AppError;
 import ru.geekbrains.spring.market.api.JwtRequest;
 import ru.geekbrains.spring.market.api.JwtResponse;
-import ru.geekbrains.spring.market.core.services.UserService;
-import ru.geekbrains.spring.market.core.utils.JwtTokenUtil;
+import ru.geekbrains.spring.market.services.UserService;
+import ru.geekbrains.spring.market.utils.JwtTokenUtil;
+
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class AuthControllers {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
@@ -29,8 +30,7 @@ public class AuthControllers {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Incorrect username or password"),HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Incorrect username or password"),HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);

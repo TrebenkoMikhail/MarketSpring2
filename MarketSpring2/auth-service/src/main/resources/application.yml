@@ -1,12 +1,12 @@
 server:
-  port: 8189
+  port: 8188
   servlet:
-    context-path: /spring-market-core
+    context-path: /spring-market-auth
     session:
       spring:
         datasource:
           driver-class-name: org.h2.Driver
-          url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
+          url: jdbc:h2:file:./users;MODE=PostgreSQL
           username: sa
           password:
       jpa:
@@ -21,7 +21,6 @@ server:
           setting:
             web-allow-others: false
 
-  url: http://localhost:8189/spring-market-core/
-  read-timeout: 10000
-  write-timeout: 5000
-  connection-timeout: 5000
+  jwt:
+    secret: sr;l4ge559835t89gj2w094j0qfj9fj0q9j09
+    lifetime: 36000000

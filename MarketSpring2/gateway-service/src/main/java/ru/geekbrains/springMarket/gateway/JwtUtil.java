@@ -1,5 +1,12 @@
+package ru.geekbrains.springMarket.gateway;
 
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class JwtUtil {
@@ -8,7 +15,7 @@ public class JwtUtil {
 
     public Claims getGetAllCaimsFromToken(String token) {
         return Jwts.parser()
-                .setSingningKey(secret)
+                .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -18,4 +25,3 @@ public class JwtUtil {
     }
     public boolean isInvalid(String token) { return this.isTokenExpired(token); }
     }
-}
