@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class ProductServiceIntegration {
-    private final RestTemplate restTemplate;
+public class CartServiceIntegration {
+    private final Webclient cartserviceWebClient;
 
     public Optional<ProductDto> getProductById(Long id) {
         return Optional.ofNullable(restTemplate.getForObject("http://localhost:8189/spring/api/v1/products/" + id, ProductDto.class));

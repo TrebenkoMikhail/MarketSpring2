@@ -18,7 +18,10 @@
         <module>core-service</module>
 		<module>cart-service</module>
         <module>api</module>
-    </modules>
+        <module>front-service</module>
+		<module>gateway-service</module>
+		<module>auth-service</module>
+	</modules>
     <properties>
 		<java.version>19</java.version>
 	</properties>

@@ -1,4 +1,9 @@
 server:
-  port: 8190
+  port: 8189
   servlet:
-    context-path: /spring-carts
+    context-path: /spring
+integrations:
+  url: http://localhost:8189/spring/
+  read-timeout: 10000
+  write-timeout: 5000
+  connection-timeout: 5000
