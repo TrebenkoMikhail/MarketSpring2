@@ -9,8 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.geekbrainsspring.MarketSpring2.entities.Roles;
-import ru.geekbrainsspring.MarketSpring2.repositories.UserRepository;
+import ru.geekbrains.spring.market.entities.Roles;
+import ru.geekbrains.spring.market.repositories.UserRepository;
+
 
 import javax.transaction.Transactional;
 import java.util.Collection;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public Optional<User> findByUsername(String username) {return userRepository.findByUsername(username); }
+    public Optional<User> findByUsername(String username) {return userRepository.findByUserName(username); }
     @Override
     @Transactional
     public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException {
