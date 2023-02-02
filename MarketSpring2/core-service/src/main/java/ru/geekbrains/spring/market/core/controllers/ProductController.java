@@ -1,6 +1,7 @@
 package ru.geekbrains.spring.market.core.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.spring.market.api.ProductDto;
 import ru.geekbrains.spring.market.api.ResourceNotFoundException;
@@ -20,8 +21,18 @@ public class ProductController {
     private  final ProductConverter productConverter;
 
     @GetMapping
-    public List<ProductDto> findAllProducts() {
-        return productService.findAll().stream().map(productConverter::entityToDto).collect(Collectors.toList());
+    public List<ProductDto> findProducts(
+            @RequestParam(required = false, name = "minPrice") Integer minPrice,
+            @RequestParam(required = false, name = "maxPrice") Integer maxPrice,
+            @RequestParam(required = false, name = "title") String title,
+            @RequestParam(defaultValue = "1", name = "p") Integer page
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+        Specification<Product> spec = productService.createSpecByFilters(minPrice, maxPrice, title);
+
+        return productService.findAll(spec, page - 1).map(productConverter :: entityToDto).getContent();
     }
 
     @GetMapping("/{id}")
