@@ -91,6 +91,12 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>ru.geekbrains.springMartket</groupId>
+            <artifactId>cart-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

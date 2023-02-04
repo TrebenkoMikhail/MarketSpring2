@@ -2,28 +2,27 @@ package ru.geekbrains.spring.market.carts;
 
 import lombok.Data;
 import ru.geekbrains.spring.market.api.ProductDto;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Data
 public class Cart {
     private List<CartItem> cartItems;
-    private int totalPrice;
+    private BigDecimal totalPrice;
+
 
     public Cart() {
         this.cartItems = new ArrayList<>();
     }
 
-    public List<CartItem> getCartItems() {
-        return Collections.unmodifiableList(cartItems);
-    }
 
     private void recalculate() {
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
         int totalQuantity = 0;
         for (CartItem item : cartItems) {
-            totalPrice += item.getPrice();
+            totalPrice = totalPrice.add(item.getPrice());
             totalQuantity += item.getQuantity();
         }
     }

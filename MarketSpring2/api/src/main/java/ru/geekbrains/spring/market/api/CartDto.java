@@ -1,11 +1,12 @@
 package ru.geekbrains.spring.market.api;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class CartDto {
     private List<CartItemDto> cartItems;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public List<CartItemDto> getCartItems() {
         return cartItems;
@@ -15,11 +16,11 @@ public class CartDto {
         this.cartItems = cartItems;
     }
 
-    public int getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

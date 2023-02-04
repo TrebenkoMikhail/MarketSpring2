@@ -18,10 +18,15 @@
                  templateUrl: 'cart/cart.html',
                  controller: 'cartController'
              })
-//             .when('/orders', {
-//                 templateUrl: 'orders/orders.html',
-//                 controller: 'ordersController'
-//             })
+             .when('/orders', {
+                 templateUrl: 'orders/orders.html',
+                 controller: 'ordersController'
+             })
+             .when('/registration', {
+                 templateUrl: 'registration/registration.html',
+                 controller: 'registrationController'
+             })
+
 //             .when('/order_pay/orderId', {
 //                 templateUrl: 'order_pay/order_pay.html',
 //                 controller: 'orderPayController'
@@ -47,12 +52,20 @@
                }
                    $http.defaults.headers.common.Authorization = 'Bearer' + $localStorage.springMarketUser.token;
            }
+
+            if (!$localStorage.springMarketGuestCardId) {
+                $http.get('http://localhost:5555/cart/api/v1/cart/generate_uuid')
+                    .then(function successCallback(response) {
+                        $localStorage.springMarketGuestCardId = response.data.value;
+                    });
+            }
      }
+     })();
 
 angular.module('market', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage)) {
 
 
-    $scope.tryToLogout = function() {
+    $rootScope.tryToLogout = function() {
         $scope.clearUser();
         $scope.user = null;
         $scope.path('/')
@@ -63,7 +76,7 @@ angular.module('market', ['ngStorage']).controller('indexController', function (
         $http.defaults.headers.common.Authorization = '';
     };
 
-    $scope.isUserLoggedIn = function() {
+    $rootScope.isUserLoggedIn = function() {
         if ($localStorage.springMarketUser) {
             return true;
         } else {

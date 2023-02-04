@@ -1,5 +1,6 @@
 package ru.geekbrains.spring.market.core.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
