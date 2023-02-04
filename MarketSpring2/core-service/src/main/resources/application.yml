@@ -21,6 +21,8 @@ server:
           setting:
             web-allow-others: false
 
+integrations:
+  cart-service:
   url: http://localhost:8189/spring-market-core/
   read-timeout: 10000
   write-timeout: 5000
