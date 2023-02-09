@@ -8,4 +8,4 @@ integrations:
   write-timeout: 5000
   connection-timeout: 5000
   cart-service:
-    cart-prefix: spring_cart_
+    cart-prefix: spring_cart

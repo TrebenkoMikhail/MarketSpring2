@@ -12,11 +12,9 @@ public class Cart {
     private List<CartItem> cartItems;
     private BigDecimal totalPrice;
 
-
     public Cart() {
         this.cartItems = new ArrayList<>();
     }
-
 
     private void recalculate() {
         totalPrice = BigDecimal.ZERO;

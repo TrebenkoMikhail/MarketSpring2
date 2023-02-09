@@ -6,6 +6,7 @@ import ru.geekbrains.spring.market.carts.CartItem;
 
 @Component
 public class CartItemConverter {
+
     public CartItemDto entityToDto(CartItem cartItem) {
         CartItemDto cartItemDto = new CartItemDto();
         cartItemDto.setPrice(cartItem.getPrice());

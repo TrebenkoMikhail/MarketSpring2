@@ -31,7 +31,6 @@ public class CartService {
         }
         return (Cart)redisTemplate.opsForValue().get(targetUuid);
     }
-
     public void add(String uuid, Long productId) {
         ProductDto product = productServiceIntegration.getProductById(productId);
         execute(uuid, cart -> cart.add(product));
