@@ -11,6 +11,7 @@ import ru.geekbrains.spring.market.api.ResourceNotFoundException;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
     @ExceptionHandler
     public ResponseEntity<AppError> exceptionHandler(ResourceNotFoundException e) {
         log.error(e.getMessage(), e);

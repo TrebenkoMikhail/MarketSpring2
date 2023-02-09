@@ -6,6 +6,7 @@ import ru.geekbrains.spring.market.core.entities.OrderItem;
 
 @Component
 public class OrderItemConverter {
+
     public OrderItemDto entityToDto(OrderItem orderItem) {
         OrderItemDto orderItemDto = new OrderItemDto();
         orderItemDto.setPrice(orderItem.getPrice());

@@ -8,8 +8,6 @@ import reactor.core.publisher.Mono;
 import ru.geekbrains.spring.market.api.ProductDto;
 import ru.geekbrains.spring.market.api.ResourceNotFoundException;
 
-import java.util.Optional;
-
 @Component
 @RequiredArgsConstructor
 public class ProductServiceIntegration {
