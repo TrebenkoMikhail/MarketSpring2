@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.geekbrains.spring.market.api.CategoryDto;
 import ru.geekbrains.spring.market.core.entities.Category;
-
 import java.util.stream.Collectors;
 
 @Component
