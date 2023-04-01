@@ -7,17 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="auth-service (2) (ru.geekbrains.springMartket)" />
         <module name="front-service" />
         <module name="cart-service" />
-        <module name="auth-service" />
-        <module name="api" />
         <module name="gateway-service" />
+        <module name="auth-service (1) (ru.geekbrains.spring.market)" />
+        <module name="api" />
         <module name="core-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="auth-service (1) (ru.geekbrains.spring.market)" target="19" />
-      <module name="auth-service (2) (ru.geekbrains.springMartket)" target="19" />
+      <module name="auth-service" target="19" />
       <module name="core" target="19" />
       <module name="MarketSpring2" target="19" />
     </bytecodeTargetLevel>

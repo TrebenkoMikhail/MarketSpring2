@@ -7,6 +7,7 @@ import ru.geekbrains.spring.market.api.ResourceNotFoundException;
 import ru.geekbrains.spring.market.core.entities.Category;
 import ru.geekbrains.spring.market.core.entities.Product;
 import ru.geekbrains.spring.market.core.services.CategoryService;
+
 @Component
 @RequiredArgsConstructor
 public class ProductConverter {

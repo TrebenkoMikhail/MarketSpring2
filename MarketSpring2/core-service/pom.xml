@@ -26,18 +26,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>9.11.0</version>
+            <version>9.16.0</version>
         </dependency>
 
         <dependency>
@@ -48,12 +48,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -69,27 +70,27 @@
         <dependency>
             <groupId>org.springframework.cloud.contract</groupId>
             <artifactId>org.springframework.cloud.contract.gradle.plugin</artifactId>
-            <version>4.0.0</version>
+            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webflux</artifactId>
-            <version>6.0.3</version>
+            <version>6.0.6</version>
         </dependency>
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty-core</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.5</version>
         </dependency>
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
             <artifactId>reactor-netty-http</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.5</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.4</version>
         </dependency>
         <dependency>
             <groupId>ru.geekbrains.springMartket</groupId>
@@ -110,6 +111,16 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.soulwing.jwt</groupId>
+            <artifactId>jwt-api</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jwt-scala</groupId>
+            <artifactId>jwt-core_3</artifactId>
+            <version>9.2.0</version>
         </dependency>
     </dependencies>
 
